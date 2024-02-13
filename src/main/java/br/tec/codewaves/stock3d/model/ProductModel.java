@@ -1,4 +1,4 @@
-package br.tec.codewaves.stock3d.models;
+package br.tec.codewaves.stock3d.model;
 
 public class ProductModel {
 
