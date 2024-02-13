@@ -1,6 +1,6 @@
 package br.tec.codewaves.stock3d.model;
 
-public class ProductFeatures {
+public class ProductFeature {
 
     private int id_feature;
     private String material;
@@ -12,13 +12,13 @@ public class ProductFeatures {
     private String extrude_temp_range;
     private String bed_temp_range;
 
-    public ProductFeatures(){
+    public ProductFeature(){
     }
 
-    public ProductFeatures(int id_feature, String material, String type_material,
-                           String manufacturer, double diameter,
-                           double ret_distance, double ret_speed,
-                           String extrude_temp_range, String bed_temp_range) {
+    public ProductFeature(int id_feature, String material, String type_material,
+                          String manufacturer, double diameter,
+                          double ret_distance, double ret_speed,
+                          String extrude_temp_range, String bed_temp_range) {
         this.id_feature = id_feature;
         this.material = material;
         this.type_material = type_material;

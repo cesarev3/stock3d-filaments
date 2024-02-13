@@ -1,33 +1,56 @@
-import br.tec.codewaves.stock3d.controllers.ProductController;
-import br.tec.codewaves.stock3d.models.ProductModel;
+import br.tec.codewaves.stock3d.controller.ProductFeatureController;
+import br.tec.codewaves.stock3d.model.ProductFeature;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args)throws SQLException {
-        ProductController productController = new ProductController();
+        ProductFeatureController productFeatureController = new ProductFeatureController();
 
         //Incluir novo Projeto
-        ProductModel productModel = new ProductModel();
+//        ProductFeature productFeature = new ProductFeature();
+//
+//        productFeature.setMaterial("TPU");
+//        productFeature.setType_material("Flex");
+//        productFeature.setManufacturer("Creality");
+//        productFeature.setDiameter(1.75);
+//        productFeature.setRet_distance(7);
+//        productFeature.setRet_speed(50);
+//        productFeature.setExtrude_temp_range("220 a 250");
+//        productFeature.setBed_temp_range("50 a 65");
+//
+//        productController.save(productModel);
 
-        productModel.setCodigo("P004");
-        productModel.setMaterial("PLA");
-        productModel.setTipo("Normal");
-        productModel.setCor("Preto Fosco");
-        productModel.setFabricante("3DLab");
-        productModel.setFab_produto("1099");
-        productModel.setDiametro(1.75);
-        productModel.setRetracao_distancia(9);
-        productModel.setRetracao_velocidade(45);
-        productModel.setBico_temperaturas("190 a 220");
-        productModel.setTemperatura_bico(215);
-        productModel.setMesa_temperaturas("50 a 60");
-        productModel.setTemperatura_mesa(60);
-        productModel.setVentoinha(100);
-        productModel.setAtivo(true);
+        //Listar a quantidade de projetos
+            List<ProductFeature> productFeatures = productFeatureController.getAll("material", "TPU");
+            for (ProductFeature products : productFeatures) {
+                System.out.print(products.getId_feature() + " ");
+                System.out.print(products.getMaterial() + " ");
+                System.out.print(products.getType_material() + " ");
+                System.out.print(products.getManufacturer() + " ");
+                System.out.println(products.getDiameter());
+            }
 
+            System.out.println("Total de produtos = " + productFeatures.size());
 
-        productController.save(productModel);
+        //Editar um produto
+//        ProductFeature productFeature = new ProductFeature();
+////
+//        productFeature.setMaterial("TPU");
+//        productFeature.setType_material("Flex");
+//        productFeature.setManufacturer("Master World");
+//        productFeature.setDiameter(1.75);
+//        productFeature.setRet_distance(7);
+//        productFeature.setRet_speed(50);
+//        productFeature.setExtrude_temp_range("220 a 250");
+//        productFeature.setBed_temp_range("50 a 65");
+//        productFeature.setId_feature(8);
+//
+//        productFeatureController.update(productFeature);
+
+        //Deletar produtos
+//           productFeatureController.removeByid(9);
 
     }
 }
