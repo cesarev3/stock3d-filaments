@@ -1,7 +1,7 @@
-package br.tec.codewaves.stock3d.controllers;
+package br.tec.codewaves.stock3d.controller;
 
-import br.tec.codewaves.stock3d.utils.ConnectionFactory;
-import br.tec.codewaves.stock3d.models.ProductModel;
+import br.tec.codewaves.stock3d.util.ConnectionFactory;
+import br.tec.codewaves.stock3d.model.ProductFeatures;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ProductController {
 
-    public void save(ProductModel productModel) {
+    public void save(ProductFeatures productFeatures) {
         String sql = "INSERT INTO prod_features (material,"
                 + " type_material,"
                 + " manufacturer,"
@@ -31,14 +31,14 @@ public class ProductController {
             statement = connection.prepareStatement(sql);
 
 
-            statement.setString(1,productModel.getMaterial());
-            statement.setString(2,productModel.getType_material());
-            statement.setString(3,productModel.getManufacturer());
-            statement.setDouble(4,productModel.getDiameter());
-            statement.setDouble(5,productModel.getRet_distance());
-            statement.setDouble(6,productModel.getRet_speed());
-            statement.setString(7,productModel.getExtrude_temp_range());
-            statement.setString(8,productModel.getBed_temp_range());
+            statement.setString(1, productFeatures.getMaterial());
+            statement.setString(2, productFeatures.getType_material());
+            statement.setString(3, productFeatures.getManufacturer());
+            statement.setDouble(4, productFeatures.getDiameter());
+            statement.setDouble(5, productFeatures.getRet_distance());
+            statement.setDouble(6, productFeatures.getRet_speed());
+            statement.setString(7, productFeatures.getExtrude_temp_range());
+            statement.setString(8, productFeatures.getBed_temp_range());
 
 
             //Executa a SQL de inserção de dados
@@ -61,12 +61,13 @@ public class ProductController {
         }
     }
 
-    public List<ProductModel> getAll(){
+    public List<ProductFeatures> getAll(String optionA, String optionB){
 
-        String sql = "SELECT * FROM prod_features";
+        String sql = "SELECT * FROM prod_features WHERE "
+            + optionA + " = '" + optionB + "'";
 
         //Lista de tarefas que será devolvida quando o método acontecer
-        List<ProductModel> productModels = new ArrayList<>();
+        List<ProductFeatures> productFeatures = new ArrayList<>();
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -88,19 +89,19 @@ public class ProductController {
 
             //Enquanto houverem valores a serem percorridos no meu resultado
             while(resultSet.next()){
-                ProductModel productModel = new ProductModel();
+                ProductFeatures productFeatures = new ProductFeatures();
 
-                productModel.setId_feature(resultSet.getInt("id_feature"));
-                productModel.setMaterial(resultSet.getString("material"));
-                productModel.setType_material(resultSet.getString("type_material"));
-                productModel.setManufacturer(resultSet.getString("manufacturer"));
-                productModel.setDiameter(resultSet.getDouble("diameter"));
-                productModel.setRet_distance(resultSet.getDouble("ret_distance"));
-                productModel.setRet_speed(resultSet.getDouble("ret_speed"));
-                productModel.setExtrude_temp_range(resultSet.getString("extrude_temp_range"));
-                productModel.setBed_temp_range(resultSet.getString("bed_temp_range"));
+                productFeatures.setId_feature(resultSet.getInt("id_feature"));
+                productFeatures.setMaterial(resultSet.getString("material"));
+                productFeatures.setType_material(resultSet.getString("type_material"));
+                productFeatures.setManufacturer(resultSet.getString("manufacturer"));
+                productFeatures.setDiameter(resultSet.getDouble("diameter"));
+                productFeatures.setRet_distance(resultSet.getDouble("ret_distance"));
+                productFeatures.setRet_speed(resultSet.getDouble("ret_speed"));
+                productFeatures.setExtrude_temp_range(resultSet.getString("extrude_temp_range"));
+                productFeatures.setBed_temp_range(resultSet.getString("bed_temp_range"));
 
-                productModels.add(productModel);
+                productFeatures.add(productFeatures);
             }
 
 
@@ -123,7 +124,7 @@ public class ProductController {
             }
         }
         //Lista de tarefas que foi criada e carregada
-        return productModels;
+        return productFeatures;
     }
 
 
